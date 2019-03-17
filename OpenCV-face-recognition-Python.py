@@ -1,12 +1,12 @@
- ###In[1]:
-**import** cv2
-**import** os
-**import** numpy **as** np
+ #In[1]:
+import cv2
+import os
+import numpy as np
 
- ###In[2]:
+ #In[2]:
 subjects = ["", "Roman Reigns", "Bhupendra"]
 
- ###In[3]:
+ #In[3]:
 def detect_face(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     
@@ -20,7 +20,7 @@ def detect_face(img):
    (x, y, w, h) = faces[0]
        return gray[y:y+w, x:x+h], faces[0]
        
-       ###In[4]:
+       #In[4]:
        def prepare_training_data(data_folder_path):
     
     dirs = os.listdir(data_folder_path)
@@ -65,7 +65,7 @@ def detect_face(img):
     
     return faces, labels
     
-    ###In[5]:
+    #In[5]:
     
 print("Preparing data...")
 faces, labels = prepare_training_data("training-data")
@@ -74,13 +74,13 @@ print("Data prepared")
 print("Total faces: ", len(faces))
 print("Total labels: ", len(labels))
 
-###In[6]:
+#In[6]:
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-###In[7]:
+#In[7]:
 face_recognizer.train(faces, np.array(labels))
 
-###In[8]:
+#In[8]:
 def draw_rectangle(img, rect):
     (x, y, w, h) = rect
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
@@ -88,7 +88,7 @@ def draw_rectangle(img, rect):
 def draw_text(img, text, x, y):
     cv2.putText(img, text, (x, y), cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
     
-   ###In[9]:
+   #In[9]:
     def predict(test_img):
     img = test_img.copy()
     face, rect = detect_face(img)
@@ -101,7 +101,7 @@ def draw_text(img, text, x, y):
     
     return img
  
-###In[10]:
+#In[10]:
  print("Predicting images...")
 test_img1 = cv2.imread("test-data/test1.jpg")
 test_img2 = cv2.imread("test-data/test2.jpg")
